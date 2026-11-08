@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>atticus morgan – Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;1,400&amp;family=Inter+Tight:wght@300&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#d2d5d9;--ink:#4d4d48;--mute:#70747a;--line:#b9bdc2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1b18;--ink:#a9a9a0;--mute:#7c7c74;--line:#32322d}}
+:root[data-theme="dark"]{--bg:#1b1b18;--ink:#a9a9a0;--mute:#7c7c74;--line:#32322d}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+html,body{height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:calc(12.5px*var(--bs,1))/1.25 "DM Mono",ui-monospace,Menlo,Consolas,monospace}
+a{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{color:var(--mute)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.app{height:100%;display:grid;grid-template-columns:25% 1fr 25%}
+.col{height:100%;padding:12px 13px 0;min-width:0}
+.left{display:flex;flex-direction:column;padding-bottom:12px;overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain}.left::-webkit-scrollbar{display:none}.left>*{flex-shrink:0}
+.mid,.right{overflow-y:auto;border-left:1px solid var(--line);scrollbar-width:none;overscroll-behavior:contain;padding:0 13px 60px}
+.mid::-webkit-scrollbar,.right::-webkit-scrollbar{display:none}
+h1{font:300 var(--hpx,max(calc(12.5px*var(--bs,1)),calc(clamp(2.4rem,4.3vw,4.6rem)*var(--ns,1.5)*var(--hs,1))))/1 "Inter Tight","Helvetica Neue",Arial,sans-serif;letter-spacing:var(--nls,-.045em);margin:0 0 calc(3.1rem + (1.5 - var(--ns,1.5))*1rem);text-transform:uppercase;overflow-wrap:break-word}
+.left p{margin:0;max-width:none}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+.left hr{margin:2.25rem 0 2.5rem}
+.links a{display:block;overflow-wrap:anywhere}
+.lhead{margin:0 0 .6rem}
+.cvjump{display:none}
+.label,.lhead,.right .row>div:first-child,.right .top span{letter-spacing:var(--hls,0)}
+.lb{background:none;border:0;padding:0;font:inherit;color:var(--mute);text-decoration:underline;cursor:pointer;text-align:left;margin-top:2.5rem}
+#themebtn{display:none}
+.themeico{display:flex;position:absolute;border-radius:50%;top:env(safe-area-inset-top,0px);right:6px;width:44px;height:44px;align-items:center;justify-content:center;background:var(--bg);border:0;padding:0;color:var(--ink);cursor:pointer;z-index:5}
+.themeico:hover{color:var(--mute)}
+.clock{margin-top:auto;color:var(--mute);position:sticky;bottom:0;background:var(--bg);padding-top:10px}
+.top{height:110px;display:flex;align-items:flex-start}
+.top span{padding-top:7px}
+.hero{margin:20px 0 0}
+.hero img{margin:0}
+.cap{text-align:right;margin-top:12px}
+.label{margin:4.5rem 0 2.25rem}
+.proj{padding:2rem 0 0;margin-bottom:5rem}
+.proj .label{margin:0 0 1.25rem}
+.mid img{display:block;width:100%;height:auto;margin:0 0 12px}
+.empty{margin-top:2rem;color:var(--mute)}
+.pg{position:relative;container-type:inline-size;margin:0;line-height:0;aspect-ratio:var(--ar,4/3);background:rgba(127,127,127,.08)}.pg .ov{line-height:1.15}.mid .pg img{margin:0}
+.ov{position:absolute;max-width:92%;white-space:pre-wrap;line-height:1.15;font-family:"DM Mono",ui-monospace,monospace}
+.ov.sans{font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;font-weight:300;letter-spacing:-.03em}
+body.placing .pg{cursor:crosshair;outline:1px dashed var(--mute)}
+body.editing .ov{cursor:move;outline:1px dashed var(--mute);touch-action:none;user-select:none}
+.guide{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed #b3261e;pointer-events:none}
+.row{display:grid;grid-template-columns:30% 1fr;gap:0 1rem;padding:22px 0 26px;border-top:1px solid var(--line)}
+.entry{margin-bottom:1.25rem}.entry i{display:block}
+.skills{margin:0;padding:0;list-style:none}
+#bio,#extra{white-space:pre-line}#extra{margin-top:2rem}
+#admin{border:1px solid var(--line);margin:14px 0 0;background:var(--bg);font-size:12.5px}
+.ah{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.ah b{text-transform:uppercase;letter-spacing:.06em}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;font:inherit;background:none;color:var(--mute);border:0;border-bottom:2px solid transparent;padding:12px 8px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:700}
+.tp{padding:20px 16px 24px}.tp>.hint{margin:0 0 24px}
+.sec{margin:0 0 32px;padding-top:20px;border-top:1px solid var(--line)}.tp>.hint+.sec{border-top:0;padding-top:0}
+.sec h4{margin:0 0 4px;text-transform:uppercase;letter-spacing:.06em}.sec h5{margin:24px 0 4px;font-size:inherit}
+.hint{margin:0 0 14px;color:var(--mute)}
+.fld{margin-bottom:14px}.fld label{display:block;margin-bottom:4px}.fld .hint{margin:4px 0 0}
+#admin input:not([type=file]),#admin textarea,#admin select{font:inherit;width:100%;background:transparent;color:inherit;border:1px solid var(--line);padding:8px}
+#admin input[type=file]{font:inherit;width:100%;margin:2px 0 4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.b{font:inherit;background:none;color:inherit;border:1px solid var(--ink);padding:6px 12px;cursor:pointer}
+.b:hover{background:var(--ink);color:var(--bg)}.b.pri{background:var(--ink);color:var(--bg)}.b.pri:hover{opacity:.85}.b.sm{padding:3px 8px}
+h1.has-logo{line-height:0;text-transform:none;margin-bottom:2.4rem}.logo{display:block;max-width:100%;height:auto}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo.inv{filter:invert(1)}}
+:root[data-theme="dark"] .logo.inv{filter:invert(1)}
+.fld.chk label{display:flex;gap:8px;align-items:center;margin:0}#admin .fld.chk input{width:auto;margin:0}
+.lpv{max-height:80px;max-width:100%;display:block;margin:0 0 12px;background:var(--bg);border:1px solid var(--line);padding:6px}
+.pl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--line)}.pl span{flex:1;min-width:8rem}
+#toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(92vw,520px);background:var(--ink);color:var(--bg);padding:10px 14px;z-index:20}
+@media (max-width:900px){
+html,body{height:auto}.app{display:flex;flex-direction:column;height:auto}.col{height:auto;padding-bottom:2rem}.left{display:contents}
+.app .left>*{order:6;margin-left:13px;margin-right:13px}
+.app .left>h1{order:1;margin-top:12px}
+.app .left>.cvjump{order:2;display:block;align-self:flex-start;margin-bottom:1.25rem}
+.app .left>#bio{order:3}.app .left>hr{order:4}.mid{order:5}
+.app .left>.lhead{order:6;border-top:1px solid var(--line);padding-top:1.5rem;margin-top:0}
+.app .left>.links{order:7}.app .left>#extra{order:8}.app .left>#editbtn{order:9}.app .left>#themebtn{order:10;display:none}.themeico{display:flex}.app .left>h1{padding-right:48px}.right{order:11}h1:not(.has-logo){margin-bottom:calc(1rem + (1.5 - var(--ns,1.5))*.5rem)}
+.clock{margin-top:2rem}.mid,.right{overflow:visible;border-left:0;border-top:1px solid var(--line)}.top{height:auto;padding:12px 0 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="">
+<button id="themeico" type="button" class="themeico" aria-label="Switch to dark mode"></button>
+<div class="app">
+<aside class="col left"><a class="cvjump" id="cvjump" href="#lhead">Jump to CV ↓</a>
+<h1 id="name" style="--ns: 0.3; text-transform: uppercase;">atticus morgan</h1>
+<p id="bio">Product design student interested in investigating applications of alternative materials and systems to public services, instances of anti-anti-social design, and class expression through fashion. 
+
+This website is as much for me as it is for you. I resist spending my free time on a screen as much as possible, so this website helps me document my work in a self-hosted space I can upload to quickly so I can get back outside and with other humans.</p>
+<hr>
+<div class="lhead" id="lhead">Contact</div><div class="links" id="links"><a href="https://www.linkedin.com/in/attimorg" target="_blank" rel="noopener">linkedin.com/in/attimorg</a><a href="mailto:attimorg@gmail.com">attimorg@gmail.com</a></div>
+<p id="extra"></p>
+<button class="lb" id="editbtn" hidden="">Edit site</button>
+<button class="lb" id="themebtn">Switch to dark</button>
+
+</aside>
+
+<main class="col mid" id="mid">
+<div id="admin" hidden=""></div>
+<div class="top"></div>
+<hr>
+<div id="mid-content"></div>
+</main>
+
+<aside class="col right" id="cvcol">
+<div class="top"><span>CV</span></div>
+
+
+
+<div class="row"><div>Employment</div><div><div class="entry">Soelberg Industries - Design Intern<i>2026 - Present</i></div><div class="entry">Saltwerk - Soft Goods Design Intern<i>2026</i></div><div class="entry">BYU Upholstery Shop - Stitcher/Upholsterer<i>2022-2026</i></div><div class="entry">Owlet Care - Prototyper<i>2021</i></div><div class="entry">Wasatch Design Collective - Fabricator<i>2019</i></div></div></div><div class="row"><div>Education</div><div><div class="entry">BYU - BFA Product Design<i>2020-2027</i></div><div class="entry">Haystack Mountain School of Craft - Woodworking<i>2025</i></div><div class="entry">Graduate Theological Union at Berkeley - Philosophy<i>2024</i></div><div class="entry">Woolf Institute at Cambridge University - Interfaith<i>2024</i></div></div></div><div class="row"><div>Skills</div><ul class="skills"><li>Pattern Making</li><li>Sewing</li><li>Tech Packs</li><li>BOMs</li><li>Adobe Illustrator</li><li>Rhino</li><li>Fusion 360</li><li>Prototyping</li><li>Product Testing</li><li>User Research</li></ul></div></aside>
+</div>
+
+<div id="toast" role="status" aria-live="polite" hidden=""></div>
+<script type="application/json" id="state">{"name":"atticus morgan","bio":"Product design student interested in investigating applications of alternative materials and systems to public services, instances of anti-anti-social design, and class expression through fashion. \n\nThis website is as much for me as it is for you. I resist spending my free time on a screen as much as possible, so this website helps me document my work in a self-hosted space I can upload to quickly so I can get back into the mountains with other humans.","linkedin":"https://www.linkedin.com/in/attimorg","email":"attimorg@gmail.com","resume":"","edu":"BYU - BFA Product Design | 2020-2027\nHaystack Mountain School of Craft - Woodworking | 2025\nGraduate Theological Union at Berkeley - Philosophy | 2024\nWoolf Institute at Cambridge University - Interfaith | 2024\n","emp":"Soelberg Industries - Design Intern | 2026 - Present\nSaltwerk - Soft Goods Design Intern | 2026\nBYU Upholstery Shop - Stitcher/Upholsterer | 2022-2026\nOwlet Care - Prototyper | 2021\nWasatch Design Collective - Fabricator | 2019\n","skills":"Pattern Making\nSewing\nTech Packs\nBOMs\nAdobe Illustrator\nRhino\nFusion 360\nPrototyping\nProduct Testing\nUser Research","fontSel":{"head":"g:Alegreya","body":"g:EB Garamond"},"links2":"","extra":"","nameSize":0.3,"nameScale":2,"gfonts":[{"name":"Alegreya"},{"name":"PT Serif"},{"name":"EB Garamond"},{"name":"Playfair Display"}],"headPx":0,"bodyPx":16,"nameCase":"upper","pdfQuality":"light","colors":null,"cv":[{"id":"emp","title":"Employment","type":"entries","text":"Soelberg Industries - Design Intern | 2026 - Present\nSaltwerk - Soft Goods Design Intern | 2026\nBYU Upholstery Shop - Stitcher/Upholsterer | 2022-2026\nOwlet Care - Prototyper | 2021\nWasatch Design Collective - Fabricator | 2019\n"},{"id":"edu","title":"Education","type":"entries","text":"BYU - BFA Product Design | 2020-2027\nHaystack Mountain School of Craft - Woodworking | 2025\nGraduate Theological Union at Berkeley - Philosophy | 2024\nWoolf Institute at Cambridge University - Interfaith | 2024\n"},{"id":"skills","title":"Skills","type":"list","text":"Pattern Making\nSewing\nTech Packs\nBOMs\nAdobe Illustrator\nRhino\nFusion 360\nPrototyping\nProduct Testing\nUser Research"}],"nameLS":0,"headLS":0,"fonts":[],"projects":[]}</script>
+<script>window.__LOCAL__={};window.__BLOBS__={};</script>
+
+<script>
+(function(){
+var S=JSON.parse(document.getElementById("state").textContent);
+var ID=/^[0-9a-f]{32}$/,OK=/^(https?:|mailto:)/;
+function $(i){return document.getElementById(i)}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function pimg(id,eager,w,s){var i=document.createElement("img");i.alt="";i.decoding="async";i.dataset.src=bu(id);
+i.onload=function(){w.style.aspectRatio="auto";if(eager&&i.naturalWidth)s.style.setProperty("--ar",i.naturalWidth+" / "+i.naturalHeight)};
+if(eager||!("IntersectionObserver" in window)){if(eager)i.fetchPriority="high";i.src=i.dataset.src}else watch(w);return i}
+var io=null;
+function watch(w){if(!io){var sc=$("mid"),sr=sc&&/auto|scroll/.test(getComputedStyle(sc).overflowY);io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var im=e.target.querySelector("img");if(im&&!im.getAttribute("src"))im.src=im.dataset.src})},{root:sr?sc:null,rootMargin:"400% 0px 400% 0px"})}io.observe(w)}
+function applyLS(){var r=document.documentElement;r.style.setProperty("--nls",((S.nameLS!=null?S.nameLS:-4.5)/100)+"em");r.style.setProperty("--hls",((S.headLS||0)/100)+"em")}
+function bodyScale(){return S.bodyPx>0?S.bodyPx/12.5:((S.fontScale&&S.fontScale.body)||1)}
+function rs(t){var f=t.f||"m",b=bodyScale(),h=S.headPx>0?1:((S.fontScale&&S.fontScale.head)||1);if(f==="s")return h;if(f==="m")return b;if(f.indexOf("f:")===0){var id=f.slice(2);if(S.fontSel.body===id)return b;if(S.fontSel.head===id)return h}return 1}
+function nameSz(){return S.nameScale===2?(S.nameSize>0?S.nameSize:1.5):((S.nameSize>0&&S.nameSize!==1)?S.nameSize:1.5)}
+function bu(id){var m=window.__BLOBS__;return (m&&m[id])||"/_blob/"+id}
+function img(id){var i=document.createElement("img");i.src=bu(id);i.loading="lazy";i.alt="";return i}
+function lines(s){return (s||"").split("\n").map(function(x){return x.trim()}).filter(Boolean)}
+function norm(u){u=(u||"").trim();if(!u)return"";if(/^https?:\/\//i.test(u))return u;if(/^(www\.)?linkedin\.com\//i.test(u))return"https://"+u;if(/^[\w.-]+$/.test(u))return"https://www.linkedin.com/in/"+u;return""}
+function short(u){return u.replace(/^https?:\/\/(www\.)?/i,"").replace(/\/$/,"")}
+function target(t){t=(t||"").trim();if(!t)return"";if(/^https?:\/\//i.test(t))return t;for(var i=0;i<S.projects.length;i++)if(!S.projects[i].hidden&&(S.projects[i].title.toLowerCase()===t.toLowerCase()||(S.projects[i].label||"").toLowerCase()===t.toLowerCase()))return"#p"+i;return""}
+function fill(id,s){var box=$(id);box.textContent="";lines(s).forEach(function(l){var p=l.split("|"),h=target(p[2]),d=el("div","entry");if(h){var a=el("a",null,p[0].trim());a.href=h;if(h.charAt(0)!=="#"){a.target="_blank";a.rel="noopener"}d.appendChild(a)}else d.textContent=p[0].trim();if(p[1]&&p[1].trim())d.appendChild(el("i",null,p[1].trim()));box.appendChild(d)})}
+
+function normCV(){if(Array.isArray(S.cv))return;S.cv=[{id:"emp",title:"Employment",type:"entries",text:S.emp||""},{id:"edu",title:"Education",type:"entries",text:S.edu||""},{id:"skills",title:"Skills",type:"list",text:S.skills||""}]}
+function cvBody(c){if(c.type==="list"){var ul=el("ul","skills");lines(c.text).forEach(function(s){ul.appendChild(el("li",null,s))});return ul}
+var box=el("div");lines(c.text).forEach(function(l){var p=l.split("|"),h=target(p[2]),d=el("div","entry");if(h){var a=el("a",null,p[0].trim());a.href=h;if(h.charAt(0)!=="#"){a.target="_blank";a.rel="noopener"}d.appendChild(a)}else d.textContent=p[0].trim();if(p[1]&&p[1].trim())d.appendChild(el("i",null,p[1].trim()));box.appendChild(d)});return box}
+function renderCV(){normCV();var as=document.querySelector("aside.right");Array.prototype.slice.call(as.querySelectorAll(".row")).forEach(function(r){r.remove()});
+S.cv.forEach(function(c){if(!(c.text||"").trim())return;var r=el("div","row");r.appendChild(el("div",null,c.title||""));r.appendChild(cvBody(c));as.appendChild(r)})}
+function render(){
+var h1=$("name");h1.textContent="";var hp=S.headPx>0?S.headPx:0,rt=document.documentElement;
+h1.style.setProperty("--ns",String(hp?Math.max(.2,Math.min(1.5,hp/62)):nameSz()));
+rt.style.setProperty("--bs",String(bodyScale()));rt.style.setProperty("--hs",String(hp?1:((S.fontScale&&S.fontScale.head)||1)));
+if(hp)h1.style.setProperty("--hpx",hp+"px");else h1.style.removeProperty("--hpx");
+applyLS();
+h1.style.textTransform=({lower:"lowercase",as:"none"})[S.nameCase]||"uppercase";
+if(S.logo&&ID.test(S.logo.id)){var lg=img(S.logo.id);lg.alt=S.name;lg.loading="eager";lg.className="logo"+(S.logo.inv?" inv":"");lg.style.width=(S.logo.w||100)+"%";h1.appendChild(lg);h1.classList.add("has-logo")}else{h1.textContent=S.name;h1.classList.remove("has-logo")}document.title=S.name+" – Portfolio";$("bio").textContent=S.bio;
+var L=$("links");L.textContent="";
+var li=norm(S.linkedin);[[li?short(li):"",li],[S.email,S.email?"mailto:"+S.email:""],["Resume",S.resume]].forEach(function(l){if(l[1]&&OK.test(l[1])){var a=el("a",null,l[0]);a.href=l[1];if(l[1].charAt(0)==="h"){a.target="_blank";a.rel="noopener"}L.appendChild(a)}});
+lines(S.links2).forEach(function(l){var p=l.split("|"),u=(p[1]||"").trim();if(p.length>1&&OK.test(u)){var a=el("a",null,p[0].trim());a.href=u;if(u.charAt(0)==="h"){a.target="_blank";a.rel="noopener"}L.appendChild(a)}});$("extra").textContent=S.extra||"";
+var lh=$("lhead");if(!lh){lh=el("div","lhead","Contact");lh.id="lhead";L.parentNode.insertBefore(lh,L)}lh.hidden=!L.children.length;
+if(!$("cvjump")){var cj=el("a","cvjump","Jump to CV \u2193");cj.id="cvjump";cj.href="#cvcol";var lc=document.querySelector("aside.left");lc.insertBefore(cj,lc.firstChild)}
+var rc=document.querySelector("aside.right");if(rc)rc.id="cvcol";
+$("cvjump").href=lh.hidden?"#cvcol":"#lhead";
+renderCV();
+var M=$("mid-content");M.hidden=false;M.textContent="";
+
+if(!S.projects.some(function(p){return !p.hidden}))M.appendChild(el("p","empty","Work coming soon."));
+S.projects.forEach(function(p,i){if(p.hidden)return;var s=el("section","proj");s.id="p"+i;if(p.label)s.appendChild(el("div","label",p.label));
+p.pages.forEach(function(id,k){if(!ID.test(id))return;var w=el("div","pg");w.appendChild(pimg(id,k===0,w,s));
+(p.texts||[]).forEach(function(t,ti){if(t.p!==k)return;var o=el("div","ov"+(t.f==="s"?" sans":""),t.t);o.style.left=t.x+"%";o.style.top=t.y+"%";o.style.fontSize=(t.s*rs(t))+"cqw";o.style.color=t.c==="w"?"#fff":"#222";if((t.f||"").indexOf("f:")===0&&lib().some(function(x){return x.id===t.f.slice(2)}))o.style.fontFamily=fam(t.f.slice(2))+",ui-monospace,monospace";
+o.onpointerdown=function(e){if(!editing||placing)return;e.preventDefault();e.stopPropagation();var r=w.getBoundingClientRect(),ox=e.clientX-(r.left+t.x/100*r.width),oy=e.clientY-(r.top+t.y/100*r.height),sx=e.clientX,sy=e.clientY,mvd=false;o.setPointerCapture(e.pointerId);
+o.onpointermove=function(m){if(Math.abs(m.clientX-sx)+Math.abs(m.clientY-sy)>4)mvd=true;if(!mvd)return;var px=(m.clientX-r.left)/r.width*100,gl=null;(p.texts||[]).forEach(function(u){if(u!==t&&u.p===k&&Math.abs(u.x-px)<.8){px=u.x;gl=u.x}});t.x=Math.max(0,Math.min(98,+px.toFixed(1)));var gd=w.querySelector(".guide");if(gl===null){if(gd)gd.remove()}else{if(!gd){gd=el("div","guide");w.appendChild(gd)}gd.style.left=gl+"%"}t.y=Math.max(0,Math.min(98,+((m.clientY-oy-r.top)/r.height*100).toFixed(1)));o.style.left=t.x+"%";o.style.top=t.y+"%"};
+o.onpointerup=function(){o.onpointermove=null;o.onpointerup=null;var g=w.querySelector(".guide");if(g)g.remove();if(mvd)run(async function(){});else if(onPick)onPick(i,ti)}};
+w.appendChild(o)});
+w.onclick=function(e){if(!placing||placing.i!==i)return;var r=w.getBoundingClientRect(),ph=placing;placing=null;document.body.classList.remove("placing");
+run(async function(){(S.projects[i].texts=S.projects[i].texts||[]).push({p:k,x:+((e.clientX-r.left)/r.width*100).toFixed(1),y:+((e.clientY-r.top)/r.height*100).toFixed(1),t:ph.t,s:ph.s,c:ph.c,f:ph.f})})};
+s.appendChild(w)});M.appendChild(s)})}
+function normFonts(){var f=S.fonts;if(f&&!Array.isArray(f)){var a=[],sel=S.fontSel||{};["head","body"].forEach(function(k){if(f[k]&&f[k].id){a.push({id:f[k].id,fmt:f[k].fmt,name:(f[k].name||"Font").replace(/\.[^.]+$/,"")});sel[k]=f[k].id}});S.fonts=a;S.fontSel=sel}
+if(!Array.isArray(S.fonts))S.fonts=[];if(!S.fontSel)S.fontSel={}}
+var BG0={light:"#d2d5d9",dark:"#1b1b18"};
+function hex6(v){v=(v||"").trim().replace(/^#/,"");if(/^[0-9a-f]{3}$/i.test(v))v=v.replace(/(.)/g,"$1$1");return /^[0-9a-f]{6}$/i.test(v)?"#"+v.toLowerCase():""}
+function applyColors(l,d){var c=S.colors||{};l=l||hex6(c.light);d=d||hex6(c.dark);var css="";if(l)css+=":root{--bg:"+l+"}";if(d)css+='@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:'+d+'}}:root[data-theme="dark"]{--bg:'+d+'}';var st=document.getElementById("colorcss");if(!st){st=document.createElement("style");st.id="colorcss";st.dataset.tmp="1";document.head.appendChild(st)}st.textContent=css}
+function lib(){return S.fonts.map(function(x){return{id:x.id,name:x.name}}).concat((S.gfonts||[]).map(function(g){return{id:"g:"+g.name,name:g.name,g:1}}))}
+function gUrl(n){return "https://fonts.googleapis.com/css2?family="+encodeURIComponent(n).replace(/%20/g,"+")+"&display=swap"}
+function gLinks(all){var u={};["head","body"].forEach(function(r){var v=S.fontSel&&S.fontSel[r];if(v&&v.indexOf("g:")===0)u[v.slice(2).toLowerCase()]=1});S.projects.forEach(function(p){(p.texts||[]).forEach(function(t){if((t.f||"").indexOf("f:g:")===0)u[t.f.slice(4).toLowerCase()]=1})});(S.gfonts||[]).forEach(function(g){var k=g.name.toLowerCase();if(!all&&!u[k])return;if(!/^[a-z0-9 ]+$/.test(k)||document.head.querySelector('link[data-g="'+k+'"]'))return;var l=document.createElement("link");l.rel="stylesheet";l.href=gUrl(g.name);l.dataset.g=k;l.dataset.tmp="1";document.head.appendChild(l)})}
+function checkG(n){return new Promise(function(res){var l=document.createElement("link");l.rel="stylesheet";l.href=gUrl(n);l.dataset.tmp="1";var done=false,f=function(v){if(done)return;done=true;l.remove();res(v)};l.onload=function(){f(true)};l.onerror=function(){f(false)};setTimeout(function(){f(false)},8000);document.head.appendChild(l)})}
+function fam(id){return id.indexOf("g:")===0?'"'+id.slice(2).replace(/["\\]/g,"")+'"':'"UF-'+id+'"'}
+function applyFonts(){normFonts();var css="";
+S.fonts.forEach(function(x){if(ID.test(x.id))css+='@font-face{font-family:'+fam(x.id)+';src:url('+bu(x.id)+') format("'+x.fmt+'");font-display:swap}'});
+var has=function(id){return lib().some(function(x){return x.id===id})};
+if(S.fontSel.body&&has(S.fontSel.body))css+='body,.ov{font-family:'+fam(S.fontSel.body)+',"DM Mono",ui-monospace,Menlo,Consolas,monospace}';
+if(S.fontSel.head&&has(S.fontSel.head))css+='h1,.ov.sans{font-family:'+fam(S.fontSel.head)+',"Inter Tight","Helvetica Neue",Arial,sans-serif;font-weight:400}';
+var fs=document.getElementById("fontcss");if(!fs){fs=document.createElement("style");fs.id="fontcss";fs.dataset.tmp="1";document.head.appendChild(fs)}fs.textContent=css}
+function applyFontsOld(){var F={},css="",ff=function(k,fam){var x=F[k];if(x&&ID.test(x.id))css+='@font-face{font-family:"'+fam+'";src:url('+bu(x.id)+') format("'+x.fmt+'");font-display:swap}'};
+ff("head","UserHead");ff("body","UserBody");
+if(F.body&&ID.test(F.body.id))css+='body,.ov{font-family:"UserBody","DM Mono",ui-monospace,Menlo,Consolas,monospace}';
+if(F.head&&ID.test(F.head.id))css+='h1,.ov.sans{font-family:"UserHead","Inter Tight","Helvetica Neue",Arial,sans-serif;font-weight:400}';
+var fs=document.getElementById("fontcss");if(!fs){fs=document.createElement("style");fs.id="fontcss";fs.dataset.tmp="1";document.head.appendChild(fs)}fs.textContent=css}
+applyFonts();gLinks();applyColors();render();
+
+var tb=$("themebtn"),root=document.documentElement;
+var ib=document.getElementById("themeico");if(!ib){ib=document.createElement("button");ib.id="themeico";ib.type="button";ib.className="themeico";document.body.insertBefore(ib,document.body.firstChild)}ib.onclick=function(){tb.click()};document.addEventListener("DOMContentLoaded",function(){var a=document.querySelectorAll("#themeico");for(var i=1;i<a.length;i++)a[i].remove()});
+function alignIco(){var h=$("name");if(!h||!ib)return;var r=h.getBoundingClientRect(),lg=h.querySelector("img"),cy=lg?r.top+r.height/2:r.top+(parseFloat(getComputedStyle(h).fontSize)||16)/2;ib.style.top=Math.round(cy+window.scrollY-22)+"px"}
+window.addEventListener("resize",alignIco);window.addEventListener("load",alignIco);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(alignIco);if(window.ResizeObserver)new ResizeObserver(alignIco).observe($("name"));alignIco();
+var SVGA='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+var MOON=SVGA+'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',SUN=SVGA+'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+function cur(){var v=(getComputedStyle(root).getPropertyValue("--bg")||"").trim(),m=/^#([0-9a-f]{6})$/i.exec(v);if(m){var n=parseInt(m[1],16);return (((n>>16)&255)+((n>>8)&255)+(n&255))/3<128?"dark":"light"}return root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}
+function lab(){var dk=cur()==="dark";tb.textContent="Switch to "+(dk?"light":"dark");ib.innerHTML=dk?SUN:MOON;ib.setAttribute("aria-label",dk?"Switch to light mode":"Switch to dark mode");ib.title=dk?"Switch to light mode":"Switch to dark mode"}
+try{var sv=localStorage.getItem("theme");if(sv==="light"||sv==="dark")root.setAttribute("data-theme",sv)}catch(e){}
+lab();
+tb.onclick=function(){var n=cur()==="dark"?"light":"dark";root.setAttribute("data-theme",n);root.style.colorScheme=n;try{localStorage.setItem("theme",n)}catch(e){}lab()};
+try{new MutationObserver(lab).observe(root,{attributes:true,attributeFilter:["data-theme","style","class"]});matchMedia("(prefers-color-scheme:dark)").addEventListener("change",lab)}catch(e){}
+setTimeout(lab,300);window.addEventListener("load",lab);
+
+/* ---------- editor (only for people who can edit this page) ---------- */
+var assets=null,art=null,placing=null,editing=false,onPick=null,st=function(m){var t=$("toast");if(!t)return;t.textContent=m||"";t.hidden=!m};
+var LOC=window.__LOCAL__||{},HD={"X-Portfolio":"1"};
+async function init(){
+if(LOC.canEdit){
+assets={upload:async function(b){var r=await fetch("/api/upload?name="+encodeURIComponent(b.name||"image.jpg"),{method:"POST",headers:Object.assign({"Content-Type":b.type||"application/octet-stream"},HD),body:b});if(!r.ok)throw new Error("Upload failed ("+r.status+")");return await r.json()},
+delete:async function(id){await fetch("/api/upload/"+id,{method:"DELETE",headers:HD})}};
+art={publish:async function(){var r=await fetch("/api/state",{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},HD),body:JSON.stringify(S)});if(!r.ok)throw new Error("Save failed ("+r.status+")");location.reload()}};
+$("editbtn").hidden=false;
+try{if(sessionStorage.getItem("reopen")==="1"){sessionStorage.removeItem("reopen");setTimeout(function(){$("editbtn").click()},0)}}catch(e){}}
+else if(LOC.needLogin){var b=$("editbtn");b.textContent="Log in to edit";b.hidden=false;
+setTimeout(function(){b.onclick=function(){var p=prompt("Edit password");if(!p)return;fetch("/api/login",{method:"POST",headers:Object.assign({"Content-Type":"application/json"},HD),body:JSON.stringify({password:p})}).then(function(r){if(r.ok)location.reload();else alert("Wrong password")})}},0)}}
+init();
+
+async function save(){
+var c=document.documentElement.cloneNode(true);
+c.querySelector("#state").textContent=JSON.stringify(S).replace(/</g,"\\u003c");
+["admin","clock","toast"].forEach(function(i){var e=c.querySelector("#"+i);if(e){e.textContent="";if(i!=="clock")e.hidden=true}});
+c.querySelector("#mid-content").hidden=false;c.querySelector("#editbtn").hidden=true;c.removeAttribute("data-theme");c.removeAttribute("style");c.querySelector("body").classList.remove("editing","placing");
+c.querySelectorAll("[data-tmp]").forEach(function(n){n.remove()});
+await art.publish("<!DOCTYPE html>\n"+c.outerHTML)}
+
+function loadScript(u){return new Promise(function(res,rej){var s=document.createElement("script");s.src=u;s.dataset.tmp="1";s.onload=res;s.onerror=function(){rej(new Error("Could not load the PDF reader"))};document.head.appendChild(s)})}
+var PJ="/vendor/";
+async function pdfjs(){if(!window.pdfjsLib){await loadScript(PJ+"pdf.min.js");await loadScript(PJ+"pdf.worker.min.js");pdfjsLib.GlobalWorkerOptions.workerSrc=PJ+"pdf.worker.min.js"}return window.pdfjsLib}
+var QS={high:{w:1800,q:.88},balanced:{w:1400,q:.8},light:{w:1000,q:.72}};
+async function pdfPages(file,hq){var Q=QS[hq?"high":(S.pdfQuality||"high")]||QS.high;var lib=await pdfjs();var doc=await lib.getDocument({data:await file.arrayBuffer()}).promise;var out=[];
+for(var n=1;n<=doc.numPages;n++){st("Reading "+file.name+", page "+n+" of "+doc.numPages);var pg=await doc.getPage(n);var v=pg.getViewport({scale:1});var vp=pg.getViewport({scale:Math.min(4,Q.w/v.width)});
+var c=document.createElement("canvas");c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext("2d"),viewport:vp}).promise;
+out.push(await new Promise(function(r){c.toBlob(r,"image/jpeg",Q.q)}))}return out}
+
+async function toIds(files){files=Array.from(files).sort(function(a,b){return a.name.localeCompare(b.name,undefined,{numeric:true})});var ids=[];
+for(var f of files){if(f.type==="application/pdf"||/\.pdf$/i.test(f.name)){var bl=await pdfPages(f);for(var i=0;i<bl.length;i++){st("Uploading page "+(i+1)+" of "+bl.length);ids.push((await assets.upload(bl[i])).id)}}
+else{st("Uploading "+f.name);ids.push((await assets.upload(f)).id)}}return ids}
+
+async function run(fn){try{await fn();st("Publishing. The page will reload.");try{sessionStorage.setItem("reopen","1")}catch(e){}await save()}catch(e){st("Something went wrong: "+((e&&(e.message||e.code))||"unknown error"))}}
+
+function field(box,label,id,val,area){box.appendChild(el("label",null,label));var i=el(area?"textarea":"input");i.id=id;if(area)i.rows=4;i.value=val||"";box.appendChild(i)}
+function btn(box,t,fn){var b=el("button","b",t);b.type="button";b.onclick=fn;box.appendChild(b);return b}
+
+function admin(){var A=$("admin");A.textContent="";A.hidden=false;editing=true;document.body.classList.add("editing");
+function nm(n){return n.replace(/\.[^.]+$/,"").replace(/[_-]+/g," ").trim()||"Untitled"}
+function sec(t,h){var d=el("section","sec");d.appendChild(el("h4",null,t));if(h)d.appendChild(el("p","hint",h));return d}
+function fld(par,lab,id,val,kind,hint){var d=el("div","fld"),l=el("label",null,lab);l.htmlFor=id;d.appendChild(l);var i=el(kind==="area"?"textarea":"input");i.id=id;if(kind==="area")i.rows=5;else i.type="text";i.value=val||"";d.appendChild(i);if(hint)d.appendChild(el("p","hint",hint));par.appendChild(d);return i}
+function sf(par,lab,opts,val){var d=el("div","fld");d.appendChild(el("label",null,lab));var s=el("select");opts.forEach(function(o){var op=el("option",null,o[0]);op.value=o[1];s.appendChild(op)});s.value=val;d.appendChild(s);par.appendChild(d);return s}
+function act(par){var d=el("div","actions");par.appendChild(d);return d}
+function pb(par,t,fn,cls){var b=el("button","b"+(cls?" "+cls:""),t);b.type="button";b.onclick=fn;par.appendChild(b);return b}
+function bad(id,msg){st(msg);var e=$(id);if(e){e.style.borderColor="#b3261e";e.scrollIntoView({block:"center"});e.focus()}}
+var cidx=0,pickFn=null,cur="left",cvSnap;try{cur=sessionStorage.getItem("tab")||"left"}catch(e){}
+document.onkeydown=function(e){if(e.key==="Escape"&&placing){placing=null;document.body.classList.remove("placing");st("")}};
+
+function leftTab(P){
+P.appendChild(el("p","hint","The fixed column on the left. It scrolls on its own if you add enough to it."));
+var s1=sec("Intro");fld(s1,"Name","pn",S.name,"text","Used for the page title. If you add a logo below, the logo replaces it at the top left.");
+
+sf(s1,"Name capitalization",[["UPPERCASE (default)","upper"],["lowercase","lower"],["As typed","as"]],S.nameCase||"upper").id="nc";
+s1.appendChild(el("p","hint","The size and letter spacing of your name are set on the Fonts tab."));fld(s1,"Bio","pb",S.bio,"area","Press Enter for a new paragraph.");P.appendChild(s1);
+var sL=sec("Logo (optional)","Shown in place of your name at the top left. Use a JPG, PNG or SVG, or a PDF (its first page is used). A PNG or SVG with a transparent background looks best.");
+if(S.logo&&ID.test(S.logo.id)){var pv=img(S.logo.id);pv.className="lpv";pv.loading="eager";sL.appendChild(pv);
+sf(sL,"Logo size",[["Small","50"],["Medium","75"],["Full width","100"]],String(S.logo.w||100)).id="lw";
+var ck=el("div","fld chk"),cl=el("label"),ci=el("input");ci.type="checkbox";ci.id="linv";ci.checked=!!S.logo.inv;cl.appendChild(ci);cl.appendChild(document.createTextNode("Invert the logo in dark mode (for a dark logo on a light background)"));ck.appendChild(cl);sL.appendChild(ck)}
+var lf=el("input");lf.type="file";lf.accept="image/*,application/pdf";sL.appendChild(lf);
+lf.onchange=function(){var f=lf.files[0];if(!f)return;run(async function(){var b=f;if(f.type==="application/pdf"||/\.pdf$/i.test(f.name)){b=(await pdfPages(f,true))[0]}
+st("Uploading logo");var r=await assets.upload(b);if(S.logo){try{await assets.delete(S.logo.id)}catch(e){}}S.logo={id:r.id,w:S.logo&&S.logo.w||100,inv:!!(S.logo&&S.logo.inv)}})};
+if(S.logo){var ra=act(sL);pb(ra,"Remove logo",function(){run(async function(){try{await assets.delete(S.logo.id)}catch(e){}S.logo=null})},"sm")}
+P.appendChild(sL);
+var s2=sec("Contact links","Shown as text under your intro.");fld(s2,"LinkedIn","pl",S.linkedin,"text","A full link, or just your handle.");fld(s2,"Email","pe",S.email,"text");
+fld(s2,"Resume link","pr",/^https?:\/\//.test(S.resume||"")?S.resume:"","text","A full link starting with https://. Leave empty for none.");P.appendChild(s2);
+var s3=sec("More");fld(s3,"Extra links","pl2",S.links2,"area","One per line, like this: Label | https://example.com");fld(s3,"Extra text","px",S.extra,"area","Shown under your links. Use it for anything else you want on the left.");P.appendChild(s3);
+var a=act(P);
+pb(a,"Save left column",function(){var li=$("pl").value.trim(),em=$("pe").value.trim(),rs=$("pr").value.trim(),l2=$("pl2").value;
+if(li&&!norm(li)){bad("pl","LinkedIn needs a link like https://linkedin.com/in/your-name, or just your handle.");return}
+if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){bad("pe","Enter a real email address.");return}
+if(rs&&!/^https?:\/\/\S+\.\S+/.test(rs)){bad("pr","Resume needs a full link starting with https://, or clear the field to leave it empty.");return}
+var bl=lines(l2).find(function(l){var p=l.split("|");return !(p.length>1&&OK.test((p[1]||"").trim()))});
+if(bl){bad("pl2","Each extra link needs this form: Label | https://example.com. This line doesn't: "+bl);return}
+run(async function(){S.name=$("pn").value.trim()||"Your Name";S.bio=$("pb").value;S.linkedin=norm(li);S.email=em;S.resume=rs;S.links2=l2;S.extra=$("px").value;S.nameSize=nameSz();S.nameScale=2;S.nameCase=$("nc").value;if(S.logo&&$("lw")){S.logo.w=+$("lw").value;S.logo.inv=$("linv").checked}})},"pri");
+var v=el("a",null,"View on page");v.href="#name";v.style.alignSelf="center";a.appendChild(v)}
+
+function rightTabOld(P){
+P.appendChild(el("p","hint","The scrolling column on the right. It holds your CV."));
+var tl=S.projects.filter(function(p){return !p.hidden}).map(function(p){return p.label||p.title}).join(", ");
+var how="One entry per line: Text | dates | link. The link is optional. It can be https://... or the name of one of your PDFs"+(tl?" ("+tl+")":"")+".";
+var s2=sec("Employment",how);fld(s2,"Employment","pm",S.emp,"area");P.appendChild(s2);
+var s1=sec("Education",how);fld(s1,"Education","pu",S.edu,"area");P.appendChild(s1);
+var s3=sec("Skills","One per line.");fld(s3,"Skills","ps",S.skills,"area");P.appendChild(s3);
+var a=act(P);pb(a,"Save right column",function(){run(async function(){S.edu=$("pu").value;S.emp=$("pm").value;S.skills=$("ps").value})},"pri");
+var v=el("a",null,"View on page");v.href="#edu";v.style.alignSelf="center";a.appendChild(v)}
+
+function rightTab(P){
+normCV();
+P.appendChild(el("p","hint","The scrolling column on the right. It holds your CV. Each section has a name on the left and its entries on the right. Add as many sections as you like."));
+var tl=S.projects.filter(function(p){return !p.hidden}).map(function(p){return p.label||p.title}).join(", ");
+var how="Entries: one per line as Text | dates | link. The link is optional. It can be https://... or the name of one of your PDFs"+(tl?" ("+tl+")":"")+". Simple list: one item per line.";
+var rows=[];
+function collect(){S.cv=rows.map(function(r){return{id:r.id,title:r.t.value.trim(),type:r.ty.value,text:r.x.value}})}
+S.cv.forEach(function(c,i){
+var s=sec(c.title||"New section");
+var t=fld(s,"Section name","cvt"+i,c.title,"text");
+var ty=sf(s,"Style",[["Entries (text, dates, link)","entries"],["Simple list (one per line)","list"]],c.type==="list"?"list":"entries");
+var x=fld(s,"Content","cvx"+i,c.text,"area",how);
+rows.push({id:c.id,t:t,ty:ty,x:x});
+var a=act(s);
+pb(a,"Up",function(){collect();if(i>0){var z=S.cv[i];S.cv[i]=S.cv[i-1];S.cv[i-1]=z}show("right")},"sm");
+pb(a,"Down",function(){collect();if(i<S.cv.length-1){var z=S.cv[i];S.cv[i]=S.cv[i+1];S.cv[i+1]=z}show("right")},"sm");
+var del=pb(a,"Delete",function(){if(del.textContent==="Delete"){del.textContent="Click again";return}collect();S.cv.splice(i,1);show("right")},"sm");
+P.appendChild(s)});
+var a=act(P);
+pb(a,"Add a section",function(){collect();S.cv.push({id:"s"+Date.now().toString(36),title:"",type:"entries",text:""});show("right");var cs=tp.querySelectorAll(".sec");if(cs.length)cs[cs.length-1].scrollIntoView()});
+pb(a,"Save right column",function(){collect();run(async function(){})},"pri");
+var v=el("a",null,"View on page");v.href="#cvcol";v.style.alignSelf="center";a.appendChild(v)}
+function centerTab(P){
+P.appendChild(el("p","hint","The scrolling column in the middle. It holds your PDFs."));
+var s1=sec("Add a PDF","It uploads and publishes right away and goes at the bottom. Images work too. The quality setting applies to PDFs you add from now on.");
+var qs=sf(s1,"Image quality",[["High quality (sharpest, largest files)","high"],["Balanced (smaller files, still sharp)","balanced"],["Light (smallest files, fastest to load)","light"]],S.pdfQuality||"high");
+qs.onchange=function(){S.pdfQuality=qs.value};
+var fi=el("input");fi.type="file";fi.multiple=true;fi.accept="application/pdf,image/*";s1.appendChild(fi);P.appendChild(s1);
+fi.onchange=function(){var fs=Array.from(fi.files);if(!fs.length)return;
+run(async function(){var isP=function(f){return f.type==="application/pdf"||/\.pdf$/i.test(f.name)};var pdfs=fs.filter(isP),imgs=fs.filter(function(f){return !isP(f)});
+for(var f of pdfs){var ids=await toIds([f]);S.projects.push({title:nm(f.name),pages:ids})}
+if(imgs.length){var ids2=await toIds(imgs);S.projects.push({title:nm(imgs[0].name),pages:ids2})}})};
+var s2=sec("Your PDFs",S.projects.length?"Use Up and Down to change the order. Hide takes a PDF off the page without deleting it, so you can show it again later.":"");if(S.projects.length)s2.appendChild(el("p","hint","Showing "+S.projects.filter(function(p){return !p.hidden}).length+" of "+S.projects.length+" PDFs on the page."));
+if(!S.projects.length)s2.appendChild(el("p","hint","No PDFs yet."));
+S.projects.forEach(function(p,i){var r=el("div","pl"),sp=el("span"),pa=el("a",null,p.label||p.title);if(p.hidden){pa.removeAttribute("href");pa.style.opacity=".55"}else pa.href="#p"+i;sp.appendChild(pa);sp.appendChild(document.createTextNode(" ("+p.pages.length+" pages"+(p.hidden?", hidden":"")+")"));r.appendChild(sp);
+var mv=function(d){var j=i+d;if(j<0||j>=S.projects.length)return;run(async function(){var x=S.projects[i];S.projects[i]=S.projects[j];S.projects[j]=x})};
+pb(r,"Up",function(){mv(-1)},"sm");pb(r,"Down",function(){mv(1)},"sm");pb(r,p.hidden?"Show":"Hide",function(){run(async function(){p.hidden=!p.hidden})},"sm");
+var del=pb(r,"Delete",function(){if(del.textContent==="Delete"){del.textContent="Click again";return}
+run(async function(){for(var id of p.pages){try{await assets.delete(id)}catch(e){}}S.projects.splice(i,1)})},"sm");
+s2.appendChild(r)});
+P.appendChild(s2);
+if(!S.projects.length)return;
+if(cidx>=S.projects.length)cidx=0;
+var s3=sec("Title and text","Choose a PDF, then give it a title or place text on top of it.");
+var sel=sf(s3,"PDF",S.projects.map(function(p,i){return[(p.label||p.title)+(p.hidden?" (hidden)":""),String(i)]}),String(cidx));
+fld(s3,"Title shown above this PDF","tl",S.projects[cidx].label,"text","Leave empty for no title.");
+var ta=act(s3);pb(ta,"Save title",function(){var i=+sel.value;run(async function(){S.projects[i].label=$("tl").value.trim()})});
+s3.appendChild(el("h5",null,"Text on the PDF"));
+s3.appendChild(el("p","hint","After placing, drag any text on the page to move it, or click it to edit."));
+var tx=fld(s3,"Text","tx","","text");
+var sz=sf(s3,"Size",[["Small","1.6"],["Medium","2.6"],["Large","4.5"],["Huge","8"]],"2.6"),co=sf(s3,"Color",[["Black","k"],["White","w"]],"k");
+var fo=sf(s3,"Font",[["Body font","m"],["Heading font","s"]].concat(lib().map(function(x){return[x.name,"f:"+x.id]})),"m");
+var a=act(s3),selK=null;
+pb(a,"Place text, then click the page",function(){var t=tx.value.trim();if(!t){st("Type the text first.");return}if(S.projects[+sel.value].hidden){st("This PDF is hidden. Click Show next to it in Your PDFs first, then place the text.");return}placing={i:+sel.value,t:t,s:+sz.value,c:co.value,f:fo.value};document.body.classList.add("placing");st("Click the spot on the PDF where the text should go. Press Esc to cancel.");var sc=$("p"+sel.value);if(sc)sc.scrollIntoView()},"pri");
+var ub=pb(a,"Update selected text",function(){var i=+sel.value,t=(S.projects[i].texts||[])[selK];if(!t)return;var v=tx.value.trim();if(!v){st("Type the text first.");return}run(async function(){t.t=v;t.s=+sz.value;t.c=co.value;t.f=fo.value})});
+var cb=pb(a,"Cancel",function(){selK=null;ub.hidden=cb.hidden=true;st("")});ub.hidden=cb.hidden=true;
+var ol=el("div","ol");s3.appendChild(ol);
+var list=function(){ol.textContent="";var i=+sel.value;(S.projects[i].texts||[]).forEach(function(t,k){var r=el("div","pl");r.appendChild(el("span",null,"Page "+(t.p+1)+": "+t.t));pb(r,"Edit",function(){if(pickFn)pickFn(k)},"sm");pb(r,"Delete",function(){run(async function(){S.projects[i].texts.splice(k,1)})},"sm");ol.appendChild(r)})};
+pickFn=function(k){var i=+sel.value,t=(S.projects[i].texts||[])[k];if(!t)return;selK=k;tx.value=t.t;sz.value=String(t.s);co.value=t.c;fo.value=t.f;ub.hidden=cb.hidden=false;st("Editing the selected text. Change it and click Update, or drag it on the page to move it.")};
+sel.onchange=function(){cidx=+sel.value;$("tl").value=S.projects[cidx].label||"";selK=null;ub.hidden=cb.hidden=true;list()};
+P.appendChild(s3);list()}
+
+function fontsTab(P){
+gLinks(true);
+P.appendChild(el("p","hint","Typefaces for the whole page."));
+var s1=sec("Upload fonts","Upload as many as you like (.woff2, .woff, .ttf or .otf). Each one stays in your library.");
+var fu=el("input");fu.type="file";fu.multiple=true;fu.accept=".woff2,.woff,.ttf,.otf";s1.appendChild(fu);P.appendChild(s1);
+fu.onchange=function(){var fl=Array.from(fu.files);if(!fl.length)return;
+run(async function(){for(var f of fl){var m=/\.(woff2|woff|ttf|otf)$/i.exec(f.name);if(!m)throw new Error(f.name+" is not a .woff2, .woff, .ttf or .otf file");
+st("Uploading "+f.name);var r=await assets.upload(f);S.fonts.push({id:r.id,fmt:{woff2:"woff2",woff:"woff",ttf:"truetype",otf:"opentype"}[m[1].toLowerCase()],name:f.name.replace(/\.[^.]+$/,"").replace(/[_-]+/g," ")})}})};
+var sg=sec("Add from Google Fonts","Type the name exactly as it appears on fonts.google.com, for example Fraunces or Space Grotesk. The regular weight is added.");
+var gi=fld(sg,"Font name","gname","","text");var ga=act(sg);
+pb(ga,"Add font",function(){var n=gi.value.trim().replace(/\s+/g," ");
+if(!/^[A-Za-z0-9 ]{2,50}$/.test(n)){bad("gname","Use letters, numbers and spaces only, like Space Grotesk.");return}
+if(lib().some(function(x){return x.name.toLowerCase()===n.toLowerCase()})){bad("gname",n+" is already in your library.");return}
+st("Checking "+n+" on Google Fonts...");
+checkG(n).then(function(ok){if(!ok){bad("gname","Couldn't load "+n+" from Google Fonts. Check the spelling and your connection.");return}run(async function(){(S.gfonts=S.gfonts||[]).push({name:n})})})});
+P.appendChild(sg);
+var s2=sec("Your fonts");if(!lib().length)s2.appendChild(el("p","hint","No fonts yet. The default fonts are in use."));
+S.fonts.forEach(function(x,n){var r=el("div","pl"),sp=el("span",null,x.name+"  Aa Bb Cc 123");sp.style.fontFamily=fam(x.id);r.appendChild(sp);
+var dl=pb(r,"Delete",function(){if(dl.textContent==="Delete"){dl.textContent="Click again";return}
+run(async function(){try{await assets.delete(x.id)}catch(e){}S.fonts.splice(n,1);["head","body"].forEach(function(k){if(S.fontSel[k]===x.id)delete S.fontSel[k]});S.projects.forEach(function(p){(p.texts||[]).forEach(function(t){if(t.f==="f:"+x.id)t.f="m"})})})},"sm");
+s2.appendChild(r)});(S.gfonts||[]).forEach(function(g,n){var r=el("div","pl"),sp=el("span",null,g.name+"  Aa Bb Cc 123  (Google Fonts)");sp.style.fontFamily=fam("g:"+g.name);r.appendChild(sp);
+var rm=pb(r,"Remove",function(){if(rm.textContent==="Remove"){rm.textContent="Click again";return}
+run(async function(){var id="g:"+g.name;S.gfonts.splice(n,1);["head","body"].forEach(function(k){if(S.fontSel[k]===id)delete S.fontSel[k]});S.projects.forEach(function(p){(p.texts||[]).forEach(function(t){if(t.f==="f:"+id)t.f="m"})})})},"sm");s2.appendChild(r)});P.appendChild(s2);
+var s3=sec("Where to use them","Heading font: your name, and text set to Heading. Body font: everything else. Sizes are in pixels, so you can even out typefaces that look bigger or smaller than the defaults. Changes show right away. Auto keeps the name's current responsive size. Letter spacing is a percentage of the type size: negative numbers pull letters closer together and positive numbers spread them apart.");
+var op=[["Default",""]].concat(lib().map(function(x){return[x.name,x.id]}));
+var HZ=[["Auto (default)","0"],["12","12"],["14","14"],["16","16"],["18","18"],["20","20"],["24","24"],["28","28"],["32","32"],["36","36"],["40","40"],["48","48"],["60","60"],["72","72"],["96","96"],["120","120"]];
+var BZ=[["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["12.5 (default)","12.5"],["13","13"],["14","14"],["16","16"],["18","18"],["20","20"],["24","24"]];
+var nearOf=function(list,v){return String(list.map(function(o){return +o[1]}).filter(function(x){return x>0}).reduce(function(a,b){return Math.abs(b-v)<Math.abs(a-v)?b:a}))};
+var hv=S.headPx>0?nearOf(HZ,S.headPx):"0",bv=nearOf(BZ,S.bodyPx>0?S.bodyPx:12.5*bodyScale());
+var hs=sf(s3,"Heading font",op,S.fontSel.head||""),hz=sf(s3,"Heading font size (px)",HZ,hv);
+var bs=sf(s3,"Body font",op,S.fontSel.body||""),bz=sf(s3,"Body font size (px)",BZ,bv);
+var LSN=[["-8%","-8"],["-6%","-6"],["-4.5% (default)","-4.5"],["-3%","-3"],["-2%","-2"],["-1%","-1"],["0% (normal)","0"],["1%","1"],["2%","2"],["3%","3"],["5%","5"],["8%","8"],["10%","10"],["15%","15"],["20%","20"]];
+var LSH=[["-5%","-5"],["-3%","-3"],["-2%","-2"],["-1%","-1"],["0% (default)","0"],["1%","1"],["2%","2"],["3%","3"],["5%","5"],["8%","8"],["10%","10"],["15%","15"],["20%","20"]];
+var nl=sf(s3,"Name letter spacing",LSN,String(S.nameLS!=null?S.nameLS:-4.5)),hl=sf(s3,"Header letter spacing (Contact, CV section names, PDF titles)",LSH,String(S.headLS||0));
+nl.onchange=function(){document.documentElement.style.setProperty("--nls",(+nl.value/100)+"em")};hl.onchange=function(){document.documentElement.style.setProperty("--hls",(+hl.value/100)+"em")};
+hz.onchange=function(){var v=+hz.value,h1=$("name");if(v>0){h1.style.setProperty("--hpx",v+"px");h1.style.setProperty("--ns",String(Math.max(.2,Math.min(1.5,v/62))))}else{h1.style.removeProperty("--hpx");h1.style.setProperty("--ns",String(nameSz()))}};bz.onchange=function(){document.documentElement.style.setProperty("--bs",String(+bz.value/12.5))};
+var a=act(s3);pb(a,"Apply fonts",function(){run(async function(){S.fontSel.head=hs.value;S.fontSel.body=bs.value;S.headPx=+hz.value>0?+hz.value:0;S.bodyPx=+bz.value;S.nameLS=+nl.value;S.headLS=+hl.value;S.fontScale=null})},"pri");P.appendChild(s3);
+var sc=sec("Background color","Type a hex code, like #d2d5d9. Changes show right away. The light color is used in light mode and the dark color in dark mode.");
+var cs=S.colors||{};
+function cf(label,id,val){var d=el("div","fld"),l=el("label",null,label);l.htmlFor=id;d.appendChild(l);var row=el("div");row.style.cssText="display:flex;gap:8px;align-items:center";var i=el("input");i.type="text";i.id=id;i.value=val;i.maxLength=7;i.placeholder="#d2d5d9";i.spellcheck=false;var sw=el("span");sw.style.cssText="width:36px;height:36px;border:1px solid var(--line);flex:none";sw.style.background=hex6(val)||"transparent";row.appendChild(i);row.appendChild(sw);d.appendChild(row);var note=el("p","hint");d.appendChild(note);sc.appendChild(d);return {i:i,sw:sw,note:note}}
+var cl=cf("Light mode background","bgl",hex6(cs.light)||BG0.light),cd=cf("Dark mode background","bgd",hex6(cs.dark)||BG0.dark);
+function lum(h){var n=parseInt(h.slice(1),16),f=function(c){c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)};return .2126*f(n>>16&255)+.7152*f(n>>8&255)+.0722*f(n&255)}
+function ratio(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function upd(c,txt){var v=hex6(c.i.value);c.sw.style.background=v||"transparent";if(!v){c.note.textContent=c.i.value.trim()?"Not a valid hex code. Use 6 digits, like #d2d5d9.":"";return}var r=ratio(v,txt);c.note.textContent="Contrast with the text: "+r.toFixed(1)+":1"+(r<4.5?" (low, the text may be hard to read)":"")}
+function prev(){applyColors(hex6(cl.i.value)||BG0.light,hex6(cd.i.value)||BG0.dark);upd(cl,"#4d4d48");upd(cd,"#a9a9a0")}
+cl.i.oninput=prev;cd.i.oninput=prev;upd(cl,"#4d4d48");upd(cd,"#a9a9a0");
+var ca=act(sc);pb(ca,"Save colors",function(){var l=hex6(cl.i.value),d=hex6(cd.i.value);if(!l){bad("bgl","Light mode needs a hex code like #d2d5d9.");return}if(!d){bad("bgd","Dark mode needs a hex code like #1b1b18.");return}run(async function(){S.colors={light:l===BG0.light?"":l,dark:d===BG0.dark?"":d}})},"pri");
+pb(ca,"Reset to default",function(){run(async function(){S.colors=null})});P.appendChild(sc)}
+
+function publishTab(P){
+P.appendChild(el("p","hint","Put your site online for free, so it stays up when your computer is off."));
+var s=sec("Publish to GitHub","Sends the current version of your site to GitHub Pages in one click. Nothing goes live until you click Publish, so you can edit as much as you like first. PDFs you have hidden are not published.");
+var fu=fld(s,"GitHub username","ghu","","text"),fr=fld(s,"Repository name","ghr","portfolio","text","It is created for you the first time if it doesn't exist. It must be public for free hosting."),ft=fld(s,"Access token","ght","","text","Needed once. The README explains how to make one. It stays on this computer, in the data folder.");
+ft.type="password";ft.autocomplete="off";
+var out=el("p","hint");out.style.cssText="margin-top:14px;white-space:pre-wrap";
+fetch("/api/publish-settings",{headers:HD}).then(function(r){return r.json()}).then(function(j){if(j.user)fu.value=j.user;if(j.repo)fr.value=j.repo;if(j.hasToken)ft.placeholder="Saved. Leave blank to keep it."}).catch(function(){});
+function saveCfg(){return fetch("/api/publish-settings",{method:"POST",headers:Object.assign({"Content-Type":"application/json"},HD),body:JSON.stringify({user:fu.value.trim(),repo:fr.value.trim(),token:ft.value.trim()})}).then(function(r){return r.json()}).then(function(j){if(j.error)throw new Error(j.error)})}
+var a=act(s);
+pb(a,"Publish to GitHub",function(){out.textContent="Publishing. This can take a little while...";
+saveCfg().then(function(){return fetch("/api/publish",{method:"POST",headers:HD})}).then(function(r){return r.json()}).then(function(j){if(j.error)throw new Error(j.error);ft.value="";
+out.textContent="Published. "+j.files+" files ("+j.mb+" MB) sent.\nYour site will be live in a minute or two at:\n"+j.live+(j.pagesNote?"\n"+j.pagesNote:"")}).catch(function(e){out.textContent="Could not publish: "+e.message})},"pri");
+pb(a,"Save settings",function(){saveCfg().then(function(){ft.value="";out.textContent="Settings saved."}).catch(function(e){out.textContent="Could not save: "+e.message})});
+s.appendChild(out);P.appendChild(s);
+var s2=sec("Or export the files yourself","Makes a folder called dist next to server.js with your whole site as plain files, for uploading to any free host by hand.");
+var o2=el("p","hint");o2.style.marginTop="14px";
+var a2=act(s2);pb(a2,"Export site",function(){o2.textContent="Exporting...";
+fetch("/api/export",{method:"POST",headers:HD}).then(function(r){return r.json()}).then(function(j){if(j.error)throw new Error(j.error);
+o2.textContent="Done. "+j.files+" files ("+j.mb+" MB) are in this folder: "+j.dir}).catch(function(e){o2.textContent="Export failed: "+e.message})});
+s2.appendChild(o2);P.appendChild(s2)}
+
+var hd=el("div","ah");hd.appendChild(el("b",null,"Edit site"));pb(hd,"Close",function(){$("editbtn").click()},"sm");A.appendChild(hd);
+var tb=el("div","tabs");tb.setAttribute("role","tablist");A.appendChild(tb);
+var tp=el("div","tp");A.appendChild(tp);
+var T={left:leftTab,center:centerTab,right:rightTab,fonts:fontsTab,publish:publishTab};
+function show(k){if(!T[k])k="left";if(k==="right"&&cur!=="right")cvSnap=JSON.stringify(S.cv||null);if(cur==="right"&&k!=="right"&&cvSnap!==undefined){var sv=JSON.parse(cvSnap);if(sv)S.cv=sv}cur=k;try{sessionStorage.setItem("tab",k)}catch(e){}pickFn=null;applyColors();applyLS();$("mid-content").hidden=(k!=="center");if(k!=="center"&&placing){placing=null;document.body.classList.remove("placing");st("")}tp.textContent="";
+Array.prototype.forEach.call(tb.children,function(b){b.setAttribute("aria-selected",String(b.dataset.k===k))});T[k](tp)}
+[["left","Left"],["center","Center"],["right","Right"],["fonts","Fonts"],["publish","Publish"]].forEach(function(t){var b=el("button",null,t[1]);b.type="button";b.dataset.k=t[0];b.setAttribute("role","tab");b.onclick=function(){show(t[0])};tb.appendChild(b)});
+onPick=function(i,k){cidx=i;show("center");if(pickFn)pickFn(k)};
+show(cur)}
+
+$("editbtn").onclick=function(){var A=$("admin");if(A.hidden){admin();$("mid").scrollTo(0,0)}else{A.hidden=true;A.textContent="";$("mid-content").hidden=false;editing=false;onPick=null;placing=null;document.body.classList.remove("editing","placing")}};
+})();
+</script>
+
+
+</body></html>
